@@ -16,6 +16,9 @@ const Index = () => {
   const [selectedFont, setSelectedFont] = useState("Inter");
   const [selectedUnit, setSelectedUnit] = useState("px");
   const [selectedColor, setSelectedColor] = useState("#000000");
+  const [fontWeight, setFontWeight] = useState(400);
+  const [letterSpacing, setLetterSpacing] = useState(0);
+  const [lineHeight, setLineHeight] = useState(1.5);
 
   return (
     <div className="min-h-screen bg-background">
@@ -50,6 +53,51 @@ const Index = () => {
                 onFontChange={setSelectedFont}
               />
 
+              <div>
+                <label className="text-sm font-medium mb-2 block">Font Weight</label>
+                <div className="flex items-center gap-4">
+                  <Slider
+                    value={[fontWeight]}
+                    onValueChange={(value) => setFontWeight(value[0])}
+                    min={100}
+                    max={900}
+                    step={100}
+                    className="flex-1"
+                  />
+                  <span className="text-sm font-mono w-12">{fontWeight}</span>
+                </div>
+              </div>
+
+              <div>
+                <label className="text-sm font-medium mb-2 block">Letter Spacing (em)</label>
+                <div className="flex items-center gap-4">
+                  <Slider
+                    value={[letterSpacing]}
+                    onValueChange={(value) => setLetterSpacing(value[0])}
+                    min={-0.1}
+                    max={0.5}
+                    step={0.01}
+                    className="flex-1"
+                  />
+                  <span className="text-sm font-mono w-16">{letterSpacing.toFixed(2)}em</span>
+                </div>
+              </div>
+
+              <div>
+                <label className="text-sm font-medium mb-2 block">Line Height</label>
+                <div className="flex items-center gap-4">
+                  <Slider
+                    value={[lineHeight]}
+                    onValueChange={(value) => setLineHeight(value[0])}
+                    min={1}
+                    max={2}
+                    step={0.1}
+                    className="flex-1"
+                  />
+                  <span className="text-sm font-mono w-12">{lineHeight.toFixed(1)}</span>
+                </div>
+              </div>
+
               <ScaleSelector
                 selectedScale={selectedScale}
                 onScaleChange={setSelectedScale}
@@ -73,6 +121,9 @@ const Index = () => {
                 selectedFont,
                 selectedUnit,
                 selectedColor,
+                fontWeight,
+                letterSpacing,
+                lineHeight,
               }}
             />
           </Card>
@@ -84,6 +135,9 @@ const Index = () => {
               fontFamily={selectedFont}
               unit={selectedUnit}
               color={selectedColor}
+              fontWeight={fontWeight}
+              letterSpacing={letterSpacing}
+              lineHeight={lineHeight}
             />
           </div>
         </div>

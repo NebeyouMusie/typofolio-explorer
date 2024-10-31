@@ -8,12 +8,24 @@ interface ExportPanelProps {
     selectedFont: string;
     selectedUnit: string;
     selectedColor: string;
+    fontWeight: number;
+    letterSpacing: number;
+    lineHeight: number;
   };
 }
 
 export const ExportPanel = ({ settings }: ExportPanelProps) => {
   const generateCSS = () => {
-    const { baseSize, selectedScale, selectedFont, selectedUnit, selectedColor } = settings;
+    const { 
+      baseSize, 
+      selectedScale, 
+      selectedFont, 
+      selectedUnit, 
+      selectedColor,
+      fontWeight,
+      letterSpacing,
+      lineHeight
+    } = settings;
     const scale = parseFloat(selectedScale);
     
     const calculateSize = (level: number) => {
@@ -34,12 +46,18 @@ export const ExportPanel = ({ settings }: ExportPanelProps) => {
   --scale-ratio: ${scale};
   --font-family: ${selectedFont};
   --text-color: ${selectedColor};
+  --font-weight: ${fontWeight};
+  --letter-spacing: ${letterSpacing}em;
+  --line-height: ${lineHeight};
 }
 
 body {
-  font-family: var(--font-family);
+  font-family: var(--font-family), sans-serif;
   font-size: var(--base-size);
   color: var(--text-color);
+  font-weight: var(--font-weight);
+  letter-spacing: var(--letter-spacing);
+  line-height: var(--line-height);
 }
 
 h1 { font-size: ${calculateSize(4)}; }

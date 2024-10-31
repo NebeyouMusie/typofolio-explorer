@@ -7,9 +7,21 @@ interface PreviewSectionProps {
   fontFamily: string;
   unit: string;
   color: string;
+  fontWeight: number;
+  letterSpacing: number;
+  lineHeight: number;
 }
 
-export const PreviewSection = ({ baseSize, scale, fontFamily, unit, color }: PreviewSectionProps) => {
+export const PreviewSection = ({ 
+  baseSize, 
+  scale, 
+  fontFamily, 
+  unit, 
+  color,
+  fontWeight,
+  letterSpacing,
+  lineHeight
+}: PreviewSectionProps) => {
   const { theme } = useTheme();
   
   const calculateSize = (level: number) => {
@@ -24,14 +36,21 @@ export const PreviewSection = ({ baseSize, scale, fontFamily, unit, color }: Pre
     }
   };
 
-  // Use the user-selected color if provided, otherwise use theme-based colors
   const textColor = color !== "#000000" ? color : theme === "dark" ? "#ffffff" : "#000000";
+
+  const textStyle = {
+    fontFamily: `${fontFamily}, sans-serif`,
+    color: textColor,
+    fontWeight,
+    letterSpacing: `${letterSpacing}em`,
+    lineHeight
+  };
 
   return (
     <Card className="p-6 space-y-8">
       <h2 className="text-2xl font-semibold mb-4">Preview</h2>
       
-      <div className="space-y-6" style={{ fontFamily, color: textColor }}>
+      <div className="space-y-6" style={textStyle}>
         <div>
           <div className="text-sm text-muted-foreground mb-2">h1 / {calculateSize(4)}</div>
           <div style={{ fontSize: calculateSize(4) }}>The quick brown fox jumps over the lazy dog</div>
