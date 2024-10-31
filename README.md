@@ -1,4 +1,4 @@
-# Welcome to your GPT Engineer project
+# Typography Scale Generator
 
 ## Project info
 
