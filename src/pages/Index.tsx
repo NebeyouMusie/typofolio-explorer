@@ -1,17 +1,20 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 import { useState } from "react";
 import { PreviewSection } from "@/components/PreviewSection";
 import { ScaleSelector } from "@/components/ScaleSelector";
 import { FontSelector } from "@/components/FontSelector";
 import { ExportPanel } from "@/components/ExportPanel";
+import { UnitSelector } from "@/components/UnitSelector";
+import { ColorSelector } from "@/components/ColorSelector";
 
 const Index = () => {
   const [baseSize, setBaseSize] = useState(16);
   const [selectedScale, setSelectedScale] = useState("1.250");
   const [selectedFont, setSelectedFont] = useState("Inter");
+  const [selectedUnit, setSelectedUnit] = useState("px");
+  const [selectedColor, setSelectedColor] = useState("#000000");
 
   return (
     <div className="min-h-screen bg-background">
@@ -47,6 +50,16 @@ const Index = () => {
                 selectedScale={selectedScale}
                 onScaleChange={setSelectedScale}
               />
+
+              <UnitSelector
+                selectedUnit={selectedUnit}
+                onUnitChange={setSelectedUnit}
+              />
+
+              <ColorSelector
+                selectedColor={selectedColor}
+                onColorChange={setSelectedColor}
+              />
             </div>
 
             <ExportPanel
@@ -54,6 +67,8 @@ const Index = () => {
                 baseSize,
                 selectedScale,
                 selectedFont,
+                selectedUnit,
+                selectedColor,
               }}
             />
           </Card>
@@ -63,6 +78,8 @@ const Index = () => {
               baseSize={baseSize}
               scale={parseFloat(selectedScale)}
               fontFamily={selectedFont}
+              unit={selectedUnit}
+              color={selectedColor}
             />
           </div>
         </div>

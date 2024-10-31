@@ -14,6 +14,17 @@ export const FontSelector = ({ selectedFont, onFontChange }: FontSelectorProps) 
     "Georgia",
     "Verdana",
     "System UI",
+    "Roboto",
+    "Open Sans",
+    "Lato",
+    "Montserrat",
+    "Poppins",
+    "Playfair Display",
+    "Source Sans Pro",
+    "Ubuntu",
+    "Merriweather",
+    "Fira Sans",
+    "Nunito",
   ];
 
   return (

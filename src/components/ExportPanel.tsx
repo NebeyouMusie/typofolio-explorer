@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
 import { toast } from "sonner";
 
 interface ExportPanelProps {
@@ -7,30 +6,49 @@ interface ExportPanelProps {
     baseSize: number;
     selectedScale: string;
     selectedFont: string;
+    selectedUnit: string;
+    selectedColor: string;
   };
 }
 
 export const ExportPanel = ({ settings }: ExportPanelProps) => {
   const generateCSS = () => {
-    const { baseSize, selectedScale, selectedFont } = settings;
+    const { baseSize, selectedScale, selectedFont, selectedUnit, selectedColor } = settings;
     const scale = parseFloat(selectedScale);
+    
+    const calculateSize = (level: number) => {
+      const size = baseSize * Math.pow(scale, level);
+      switch (selectedUnit) {
+        case "rem":
+          return `${(size / 16).toFixed(3)}rem`;
+        case "pt":
+          return `${Math.round(size * 0.75)}pt`;
+        default:
+          return `${Math.round(size)}px`;
+      }
+    };
     
     return `/* Typography Scale */
 :root {
-  --base-size: ${baseSize}px;
+  --base-size: ${calculateSize(0)};
   --scale-ratio: ${scale};
   --font-family: ${selectedFont};
+  --text-color: ${selectedColor};
 }
 
 body {
   font-family: var(--font-family);
   font-size: var(--base-size);
+  color: var(--text-color);
 }
 
-h1 { font-size: calc(var(--base-size) * var(--scale-ratio) * var(--scale-ratio) * var(--scale-ratio) * var(--scale-ratio)); }
-h2 { font-size: calc(var(--base-size) * var(--scale-ratio) * var(--scale-ratio) * var(--scale-ratio)); }
-h3 { font-size: calc(var(--base-size) * var(--scale-ratio) * var(--scale-ratio)); }
-h4 { font-size: calc(var(--base-size) * var(--scale-ratio)); }`;
+h1 { font-size: ${calculateSize(4)}; }
+h2 { font-size: ${calculateSize(3)}; }
+h3 { font-size: ${calculateSize(2)}; }
+h4 { font-size: ${calculateSize(1)}; }
+h5 { font-size: ${calculateSize(0.5)}; }
+h6 { font-size: ${calculateSize(0.25)}; }
+p { font-size: ${calculateSize(0)}; }`;
   };
 
   const handleExportCSS = () => {
