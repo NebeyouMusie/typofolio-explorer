@@ -8,6 +8,7 @@ import { FontSelector } from "@/components/FontSelector";
 import { ExportPanel } from "@/components/ExportPanel";
 import { UnitSelector } from "@/components/UnitSelector";
 import { ColorSelector } from "@/components/ColorSelector";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const Index = () => {
   const [baseSize, setBaseSize] = useState(16);
@@ -19,7 +20,10 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <main className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold mb-8">Typography Scale Generator</h1>
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-4xl font-bold">Typography Scale Generator</h1>
+          <ThemeToggle />
+        </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           <Card className="lg:col-span-4 p-6 space-y-6">
