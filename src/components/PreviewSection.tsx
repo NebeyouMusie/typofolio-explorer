@@ -6,21 +6,9 @@ interface PreviewSectionProps {
   fontFamily: string;
   unit: string;
   color: string;
-  fontWeight: string;
-  letterSpacing: number;
-  lineHeight: number;
 }
 
-export const PreviewSection = ({ 
-  baseSize, 
-  scale, 
-  fontFamily, 
-  unit, 
-  color,
-  fontWeight,
-  letterSpacing,
-  lineHeight
-}: PreviewSectionProps) => {
+export const PreviewSection = ({ baseSize, scale, fontFamily, unit, color }: PreviewSectionProps) => {
   const calculateSize = (level: number) => {
     const size = baseSize * Math.pow(scale, level);
     switch (unit) {
@@ -33,19 +21,11 @@ export const PreviewSection = ({
     }
   };
 
-  const textStyle = {
-    fontFamily: `${fontFamily}, sans-serif`,
-    color,
-    fontWeight,
-    letterSpacing: `${letterSpacing}em`,
-    lineHeight: lineHeight
-  };
-
   return (
     <Card className="p-6 space-y-8">
       <h2 className="text-2xl font-semibold mb-4">Preview</h2>
       
-      <div className="space-y-6" style={textStyle}>
+      <div className="space-y-6" style={{ fontFamily, color }}>
         <div>
           <div className="text-sm text-muted-foreground mb-2">h1 / {calculateSize(4)}</div>
           <div style={{ fontSize: calculateSize(4) }}>The quick brown fox jumps over the lazy dog</div>

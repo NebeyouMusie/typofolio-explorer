@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { useState } from "react";
@@ -7,10 +8,6 @@ import { FontSelector } from "@/components/FontSelector";
 import { ExportPanel } from "@/components/ExportPanel";
 import { UnitSelector } from "@/components/UnitSelector";
 import { ColorSelector } from "@/components/ColorSelector";
-import { FontWeightSelector } from "@/components/FontWeightSelector";
-import { LetterSpacingSelector } from "@/components/LetterSpacingSelector";
-import { LineHeightSelector } from "@/components/LineHeightSelector";
-import { ThemeToggle } from "@/components/ThemeToggle";
 
 const Index = () => {
   const [baseSize, setBaseSize] = useState(16);
@@ -18,17 +15,11 @@ const Index = () => {
   const [selectedFont, setSelectedFont] = useState("Inter");
   const [selectedUnit, setSelectedUnit] = useState("px");
   const [selectedColor, setSelectedColor] = useState("#000000");
-  const [selectedWeight, setSelectedWeight] = useState("400");
-  const [letterSpacing, setLetterSpacing] = useState(0);
-  const [lineHeight, setLineHeight] = useState(1.5);
 
   return (
     <div className="min-h-screen bg-background">
       <main className="container mx-auto px-4 py-8">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-4xl font-bold">Typography Scale Generator</h1>
-          <ThemeToggle />
-        </div>
+        <h1 className="text-4xl font-bold mb-8">Typography Scale Generator</h1>
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           <Card className="lg:col-span-4 p-6 space-y-6">
@@ -69,21 +60,6 @@ const Index = () => {
                 selectedColor={selectedColor}
                 onColorChange={setSelectedColor}
               />
-
-              <FontWeightSelector
-                selectedWeight={selectedWeight}
-                onWeightChange={setSelectedWeight}
-              />
-
-              <LetterSpacingSelector
-                letterSpacing={letterSpacing}
-                onLetterSpacingChange={(value) => setLetterSpacing(value[0])}
-              />
-
-              <LineHeightSelector
-                lineHeight={lineHeight}
-                onLineHeightChange={(value) => setLineHeight(value[0])}
-              />
             </div>
 
             <ExportPanel
@@ -93,9 +69,6 @@ const Index = () => {
                 selectedFont,
                 selectedUnit,
                 selectedColor,
-                selectedWeight,
-                letterSpacing,
-                lineHeight,
               }}
             />
           </Card>
@@ -107,9 +80,6 @@ const Index = () => {
               fontFamily={selectedFont}
               unit={selectedUnit}
               color={selectedColor}
-              fontWeight={selectedWeight}
-              letterSpacing={letterSpacing}
-              lineHeight={lineHeight}
             />
           </div>
         </div>
