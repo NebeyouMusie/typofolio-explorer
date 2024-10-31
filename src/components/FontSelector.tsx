@@ -7,24 +7,13 @@ interface FontSelectorProps {
 
 export const FontSelector = ({ selectedFont, onFontChange }: FontSelectorProps) => {
   const fonts = [
-    "Inter",
-    "Arial",
-    "Helvetica",
-    "Times New Roman",
-    "Georgia",
-    "Verdana",
-    "System UI",
-    "Roboto",
-    "Open Sans",
-    "Lato",
-    "Montserrat",
-    "Poppins",
-    "Playfair Display",
-    "Source Sans Pro",
-    "Ubuntu",
-    "Merriweather",
-    "Fira Sans",
-    "Nunito",
+    { name: "Inter", family: "'Inter', sans-serif" },
+    { name: "Arial", family: "Arial, sans-serif" },
+    { name: "Helvetica", family: "Helvetica, sans-serif" },
+    { name: "Times New Roman", family: "'Times New Roman', serif" },
+    { name: "Georgia", family: "Georgia, serif" },
+    { name: "Verdana", family: "Verdana, sans-serif" },
+    { name: "System UI", family: "system-ui, sans-serif" },
   ];
 
   return (
@@ -36,8 +25,12 @@ export const FontSelector = ({ selectedFont, onFontChange }: FontSelectorProps) 
         </SelectTrigger>
         <SelectContent>
           {fonts.map((font) => (
-            <SelectItem key={font} value={font}>
-              {font}
+            <SelectItem 
+              key={font.name} 
+              value={font.family}
+              style={{ fontFamily: font.family }}
+            >
+              {font.name}
             </SelectItem>
           ))}
         </SelectContent>

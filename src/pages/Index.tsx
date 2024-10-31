@@ -13,7 +13,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 const Index = () => {
   const [baseSize, setBaseSize] = useState(16);
   const [selectedScale, setSelectedScale] = useState("1.250");
-  const [selectedFont, setSelectedFont] = useState("Inter");
+  const [selectedFont, setSelectedFont] = useState("'Inter', sans-serif");
   const [selectedUnit, setSelectedUnit] = useState("px");
   const [selectedColor, setSelectedColor] = useState("#000000");
   const [fontWeight, setFontWeight] = useState(400);
