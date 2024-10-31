@@ -1,4 +1,5 @@
 import { Card } from "@/components/ui/card";
+import { useTheme } from "next-themes";
 
 interface PreviewSectionProps {
   baseSize: number;
@@ -9,6 +10,8 @@ interface PreviewSectionProps {
 }
 
 export const PreviewSection = ({ baseSize, scale, fontFamily, unit, color }: PreviewSectionProps) => {
+  const { theme } = useTheme();
+  
   const calculateSize = (level: number) => {
     const size = baseSize * Math.pow(scale, level);
     switch (unit) {
@@ -21,11 +24,14 @@ export const PreviewSection = ({ baseSize, scale, fontFamily, unit, color }: Pre
     }
   };
 
+  // Use the user-selected color if provided, otherwise use theme-based colors
+  const textColor = color !== "#000000" ? color : theme === "dark" ? "#ffffff" : "#000000";
+
   return (
     <Card className="p-6 space-y-8">
       <h2 className="text-2xl font-semibold mb-4">Preview</h2>
       
-      <div className="space-y-6" style={{ fontFamily, color }}>
+      <div className="space-y-6" style={{ fontFamily, color: textColor }}>
         <div>
           <div className="text-sm text-muted-foreground mb-2">h1 / {calculateSize(4)}</div>
           <div style={{ fontSize: calculateSize(4) }}>The quick brown fox jumps over the lazy dog</div>
